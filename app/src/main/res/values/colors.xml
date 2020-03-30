@@ -2,12 +2,16 @@
 <resources>
     <color name="colorPrimary">#404040</color>
     <color name="colorPrimaryDark">#404040</color>
-    <color name="colorTextBoxBack">#CCE3E3E3</color>
+    <color name="colorTextBoxBack">#CC808080</color>
+    <color name="colorItem">#CC808080</color>
     <color name="colorInput">#686868</color>
     <color name="colorLogin">#ffffff</color>
+    <color name="colorEmpName">#ffffff</color>
     <color name="colorLoginBut">#FF5722</color>
     <color name="colorHint">#c3acacac</color>
     <color name="colorListBtn1">#00BDBD</color>
     <color name="colorListBtn2">#BD00B0</color>
     <color name="colorListBtn3">#DCC000</color>
+    <color name="colorTitleBar">#609762</color>
+
 </resources>

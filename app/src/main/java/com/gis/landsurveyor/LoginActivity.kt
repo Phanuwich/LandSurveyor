@@ -39,23 +39,23 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
 //                d("chikk","status = ${response.message()}")
                 if (response.body()?.user_id == null) {
-                    Log.d("chikk", "error = incorrect username or password")
+                    Log.d("chikk", getString(R.string.error_login))
                 }else{
                     Log.d("chikk", "Login success user id = ${response.body()?.user_id}")
-                    callEmployeeInfo(response.body()?.user_id)
+                    callEmployee(response.body()?.user_id)
                 }
             }
         })
     }
 
-    fun callEmployeeInfo(user_id: Int?) {
+    fun callEmployee(user_id: Int?) {
         apiService.getEmpInfo(user_id).enqueue(object : Callback<EmployeeInfo>{
             override fun onFailure(call: Call<EmployeeInfo>, t: Throwable) {
                 Log.d("chikk", "Failure jaaa $t")
             }
             override fun onResponse(call: Call<EmployeeInfo>, response: Response<EmployeeInfo>) {
                 if (response.body()?.employee_id == null) {
-                    Log.d("chikk", "error: can't find your employee id")
+                    Log.d("chikk", getString(R.string.error_emp))
                 }else{
                     Log.d(
                         "chikk", "Your Employee info = ${response.body()?.employee_id}," +
@@ -65,11 +65,10 @@ class LoginActivity : AppCompatActivity() {
                     )
                     empInfo = response.body()!!
                     SingletonEmp.instance = empInfo
-//                    val intent = Intent(applicationContext, HomeActivity::class.java)
-////                    intent.putExtra("EmpInfo",empInfo)
-//                    finish()
-//                    startActivity(intent)
-////                    callRequests(empInfo.employee_id)
+                    val intent = Intent(applicationContext, MenuActivity::class.java)
+//                    intent.putExtra("EmpInfo",empInfo)
+                    finish()
+                    startActivity(intent)
                 }
             }
         })

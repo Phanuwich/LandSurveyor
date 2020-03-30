@@ -1,6 +1,26 @@
 <resources>
     <string name="app_name">LandSurveyor</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="error_login">Incorrect Username or Password</string>
+    <string name="error_emp">Can not find your employee information</string>
+    <string name="emp_name_label">Name : %s %s</string>
+    <string name="error_request_list">Fail to request List jaa</string>
+    <string name="empty_request_list">Congratulations!,you don\'t have any requests for now!</string>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="statusList">
+        <item>assigned</item>
+        <item>collecting</item>
+        <item>success</item>
+    </string-array>
+    <string-array name="DeedType">
+        <item>สค1</item>
+        <item>นส.2</item>
+        <item>นส.3</item>
+        <item>นส.3ก</item>
+        <item>นส.4</item>
+    </string-array>
 </resources>

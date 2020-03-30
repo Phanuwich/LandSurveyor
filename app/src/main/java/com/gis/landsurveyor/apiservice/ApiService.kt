@@ -18,15 +18,15 @@ interface ApiService {
         @Body request_body: LoginRequest
     ):Call<LoginResponse>
 
-    @GET("/api/v1/deeds")
-    fun getRequests(
-        @Query("employee_id") employee_id:Int?
-    ):Call<ArrayList<RequestModel>>
-
     @GET("/api/v1/employees")
     fun getEmpInfo(
         @Query("user_id") user_id:Int?
     ):Call<EmployeeInfo>
+
+    @GET("/api/v1/deeds")
+    fun getRequests(
+        @Query("employee_id") employee_id:Int?
+    ):Call<ArrayList<RequestModel>>
 
     @PATCH("api/v1/deeds/{id}")
     fun updateStatus(
