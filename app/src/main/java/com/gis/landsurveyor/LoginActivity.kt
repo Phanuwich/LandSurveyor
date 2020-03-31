@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        lgbut.setOnClickListener {
+        login_btn.setOnClickListener {
             val username = username.text.toString()
             val password = password.text.toString()
             callLogin(username,password)

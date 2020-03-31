@@ -1,10 +1,16 @@
 package com.gis.landsurveyor
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.icu.text.LocaleDisplayNames
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.gis.landsurveyor.responseModel.RequestModel
 
 class MyExpandableListAdapter(var context :Context,var expandableListView: ExpandableListView,var header: MutableList<String>, var body:MutableList<MutableList<RequestModel>>) : BaseExpandableListAdapter() {
@@ -20,6 +26,7 @@ class MyExpandableListAdapter(var context :Context,var expandableListView: Expan
         return false
     }
 
+    @SuppressLint("ResourceAsColor", "StringFormatMatches")
     override fun getGroupView(
         groupPosition: Int,
         isExpanded: Boolean,
@@ -32,13 +39,21 @@ class MyExpandableListAdapter(var context :Context,var expandableListView: Expan
             convertView = inflater.inflate(R.layout.exandable_list_group,null)
         }
         val title = convertView?.findViewById<Button>(R.id.listGroup)
-        title?.text = getGroup(groupPosition)
-        if (groupPosition == 0){
-            title?.setBackgroundResource(R.drawable.list_button_bg1)
-        }else if (groupPosition == 1){
-            title?.setBackgroundResource(R.drawable.list_button_bg2)
-        }else{
-            title?.setBackgroundResource(R.drawable.list_button_bg3)
+//        title?.text = getGroup(groupPosition)
+        title?.text = context.getString(R.string.header_status,getGroup(groupPosition),getChildrenCount(groupPosition))
+        when (groupPosition) {
+            0 -> {
+                title?.setBackgroundResource(R.drawable.list_button_bg1)
+                title?.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_label_btn1,0,0,0)
+            }
+            1 -> {
+                title?.setBackgroundResource(R.drawable.list_button_bg2)
+                title?.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_label_btn2,0,0,0)
+            }
+            else -> {
+                title?.setBackgroundResource(R.drawable.list_button_bg3)
+                title?.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_label_btn3,0,0,0)
+            }
         }
         title?.setOnClickListener {
             if(expandableListView.isGroupExpanded(groupPosition))
@@ -56,8 +71,8 @@ class MyExpandableListAdapter(var context :Context,var expandableListView: Expan
 
 
     //edit from string to request type
-    override fun getChild(groupPosition: Int, childPosition: Int): String {
-        return body[groupPosition][childPosition].deed_name
+    override fun getChild(groupPosition: Int, childPosition: Int): RequestModel {
+        return body[groupPosition][childPosition]
     }
 
     override fun getGroupId(groupPosition: Int): Long {
@@ -76,12 +91,20 @@ class MyExpandableListAdapter(var context :Context,var expandableListView: Expan
             val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = inflater.inflate(R.layout.expandable_list_item,null)
         }
+        val tap = convertView?.findViewById<View>(R.id.tap_item)
         val title = convertView?.findViewById<TextView>(R.id.listText)
         val title2 = convertView?.findViewById<TextView>(R.id.listText2)
-        title?.text = getChild(groupPosition,childPosition)
-        title2?.text = "222222222222"
-        title?.setOnClickListener {
-            Toast.makeText(context, getChild(groupPosition,childPosition),Toast.LENGTH_SHORT).show()
+
+        title?.text = context.getString(R.string.item_id,getChild(groupPosition,childPosition).deed_id.toString())
+        title2?.text = context.getString(R.string.item_name,getChild(groupPosition,childPosition).deed_name)
+
+        tap?.setOnClickListener {
+            //chane page here!
+            Toast.makeText(context, getChild(groupPosition,childPosition).deed_name,Toast.LENGTH_SHORT).show()
+
+//            val intent = Intent(context, DetailActivity::class.java)
+//            context.startActivity(intent)
+
         }
         return convertView
     }

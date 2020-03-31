@@ -1,7 +1,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <solid android:color="@color/colorTitleBar"/>
-    <corners android:bottomLeftRadius="@dimen/title_radius"/>
     <padding android:left="@dimen/title_padding_lrb"/>
     <padding android:right="@dimen/title_padding_lrb"/>
     <padding android:bottom="@dimen/title_padding_lrb"/>

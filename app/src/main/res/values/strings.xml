@@ -1,14 +1,19 @@
 <resources>
     <string name="app_name">LandSurveyor</string>
+    <string name="login_title">Hello there!</string>
 
     <string name="error_login">Incorrect Username or Password</string>
     <string name="error_emp">Can not find your employee information</string>
-    <string name="emp_name_label">Name : %s %s</string>
+    <string name="emp_name_label">Employee Name\n: %s %s</string>
     <string name="error_request_list">Fail to request List jaa</string>
     <string name="empty_request_list">Congratulations!,you don\'t have any requests for now!</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="header_status">%s : (%s)</string>
+    <string name="item_id">Request ID : %s</string>
+    <string name="item_name">Request Name : %s</string>
 
 
     <string-array name="statusList">
@@ -23,4 +28,7 @@
         <item>นส.3ก</item>
         <item>นส.4</item>
     </string-array>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>
