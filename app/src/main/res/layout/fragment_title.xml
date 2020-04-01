@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@drawable/bg_title_bar"
+android:orientation="vertical"
+android:gravity="center"
+tools:context=".TitleFragment">
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/logo"/>
+
+<TextView
+    android:id="@+id/emp_name_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/title_margin_t_name"
+    android:layout_gravity="right"
+    android:textColor="@color/colorEmpName"
+    android:fontFamily="@font/light"
+    android:text="Employee Name"
+    android:textAlignment="textEnd"
+    tools:ignore="RtlCompat" />
+
+</LinearLayout>

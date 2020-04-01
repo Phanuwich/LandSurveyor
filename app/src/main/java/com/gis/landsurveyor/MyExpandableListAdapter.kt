@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.gis.landsurveyor.responseModel.RequestModel
 
 class MyExpandableListAdapter(var context :Context,var expandableListView: ExpandableListView,var header: MutableList<String>, var body:MutableList<MutableList<RequestModel>>) : BaseExpandableListAdapter() {
@@ -101,10 +103,8 @@ class MyExpandableListAdapter(var context :Context,var expandableListView: Expan
         tap?.setOnClickListener {
             //chane page here!
             Toast.makeText(context, getChild(groupPosition,childPosition).deed_name,Toast.LENGTH_SHORT).show()
-
-//            val intent = Intent(context, DetailActivity::class.java)
-//            context.startActivity(intent)
-
+            HomeActivity.currentRequestModel = getChild(groupPosition,childPosition)
+            ListFragment.navController.navigate(R.id.action_listFragment_to_detailFragment)
         }
         return convertView
     }

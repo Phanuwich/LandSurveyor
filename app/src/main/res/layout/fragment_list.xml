@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuActivity">
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/title_bar"
-        />
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ListFragment">
 
     <ExpandableListView
         android:id="@+id/expandableListView"
@@ -21,12 +15,12 @@
         android:foregroundGravity="center"
         android:groupIndicator="@null"
         android:headerDividersEnabled="true"
-        android:paddingTop="@dimen/all_stroke_padding"
         android:paddingLeft="@dimen/all_stroke_padding"
+        android:paddingTop="@dimen/all_stroke_padding"
         android:paddingRight="@dimen/all_stroke_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

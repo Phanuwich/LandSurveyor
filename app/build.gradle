@@ -43,9 +43,19 @@ dependencies {
 
     // gis part
     implementation 'com.esri.arcgisruntime:arcgis-android:100.7.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation "android.arch.lifecycle:extensions:1.1.1"
 
     // view part
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    // nav_graph
+    def nav_version = "2.3.0-alpha02"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

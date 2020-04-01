@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
     private val apiService = retrofitClient.callApi()
     lateinit var empInfo: EmployeeInfo
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportActionBar!!.hide()
+//        supportActionBar!!.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
                     )
                     empInfo = response.body()!!
                     SingletonEmp.instance = empInfo
-                    val intent = Intent(applicationContext, MenuActivity::class.java)
+                    val intent = Intent(applicationContext, HomeActivity::class.java)
 //                    intent.putExtra("EmpInfo",empInfo)
                     finish()
                     startActivity(intent)

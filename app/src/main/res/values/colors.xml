@@ -14,4 +14,8 @@
     <color name="colorTitleBar">#609762</color>
     <color name="colorItem">#CC808080</color>
 
+    <color name="colorRedoUndo">#E68787</color>
+    <color name="colorFinish">#006400</color>
+    <color name="colorFinishText">#ffffff</color>
+
 </resources>
