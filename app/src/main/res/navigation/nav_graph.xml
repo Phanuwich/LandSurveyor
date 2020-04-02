@@ -24,13 +24,6 @@
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <action
-            android:id="@+id/action_detailFragment_to_navigationFragment"
-            app:destination="@id/navigationFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
             android:id="@+id/action_detailFragment_to_mapFragment"
             app:destination="@id/mapFragment"
             app:enterAnim="@anim/slide_in_right"
@@ -38,11 +31,6 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
-    <fragment
-        android:id="@+id/navigationFragment"
-        android:name="com.gis.landsurveyor.NavigationFragment"
-        android:label="fragment_navigation"
-        tools:layout="@layout/fragment_navigation" />
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.gis.landsurveyor.MapFragment"

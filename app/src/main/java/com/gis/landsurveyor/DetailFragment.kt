@@ -1,5 +1,6 @@
 package com.gis.landsurveyor
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
 import androidx.fragment.app.Fragment
@@ -43,8 +44,11 @@ class DetailFragment : Fragment() {
             navController.navigate(R.id.action_detailFragment_to_mapFragment)
         }
         routingBtn.setOnClickListener {
-            navController.navigate(R.id.navigationFragment)
+            val intent = Intent(context, NavigateActivity::class.java)
+                    intent.putExtra("request",request)
+            startActivity(intent)
         }
+
     }
 
 }
