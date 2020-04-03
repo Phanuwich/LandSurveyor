@@ -2,9 +2,9 @@
     android:shape="rectangle">
     <solid android:color="@color/colorTitleBar"/>
     <corners android:bottomLeftRadius="@dimen/title_radius"/>
-    <padding android:left="@dimen/title_padding_lrb"/>
-    <padding android:right="@dimen/title_padding_lrb"/>
-    <padding android:bottom="@dimen/title_padding_lrb"/>
+    <padding android:left="@dimen/title_padding_lrbt"/>
+    <padding android:right="@dimen/title_padding_lrbt"/>
+    <padding android:bottom="@dimen/title_padding_lrbt"/>
     <padding android:top="@dimen/title_padding_top"/>
 
 </shape>

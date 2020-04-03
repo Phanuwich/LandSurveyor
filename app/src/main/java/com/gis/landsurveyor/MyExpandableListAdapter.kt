@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.icu.text.LocaleDisplayNames
 import android.text.Layout
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -103,6 +104,8 @@ class MyExpandableListAdapter(var context :Context,var expandableListView: Expan
         tap?.setOnClickListener {
             //chane page here!
             Toast.makeText(context, getChild(groupPosition,childPosition).deed_name,Toast.LENGTH_SHORT).show()
+            d("chikk","gfgfgfg = ${getChild(groupPosition,childPosition).deed_id}")
+            HomeActivity.currentRequest = getChild(groupPosition,childPosition).deed_id
             HomeActivity.currentRequestModel = getChild(groupPosition,childPosition)
             ListFragment.navController.navigate(R.id.action_listFragment_to_detailFragment)
         }

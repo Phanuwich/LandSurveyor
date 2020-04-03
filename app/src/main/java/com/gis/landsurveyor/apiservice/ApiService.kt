@@ -1,16 +1,18 @@
 package com.gis.landsurveyor.apiservice
 
+import com.gis.landsurveyor.User
 import com.gis.landsurveyor.requestModel.LoginRequest
 import com.gis.landsurveyor.requestModel.UpdateRequest
-import com.gis.landsurveyor.responseModel.EmployeeInfo
-import com.gis.landsurveyor.responseModel.LoginResponse
-import com.gis.landsurveyor.responseModel.RequestModel
-import com.gis.landsurveyor.responseModel.UpdateResponse
+import com.gis.landsurveyor.responseModel.*
 import retrofit2.Call
 import retrofit2.http.*
 import java.util.ArrayList
 
 interface ApiService {
+
+    @GET("/users")
+    fun getUser():Call<ArrayList<User>>
+
 
     @Headers("Content-Type: application/json")
     @POST("/api/v1/login")
@@ -26,7 +28,17 @@ interface ApiService {
     @GET("/api/v1/deeds")
     fun getRequests(
         @Query("employee_id") employee_id:Int?
-    ):Call<ArrayList<RequestModel>>
+    ):Call<MutableList<RequestModel>>
+
+//    @GET("/api/v1/customers/{id}")
+//    fun getCustomer(
+//        @Path("id") id: Int
+//    ):Call<Customer>
+
+    @GET("/api/v1/deeds/{id}")
+    fun getDetail(
+        @Path("id") id: Int
+    ):Call<RequestModel>
 
     @PATCH("api/v1/deeds/{id}")
     fun updateStatus(

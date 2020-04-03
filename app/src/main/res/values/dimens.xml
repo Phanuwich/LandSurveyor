@@ -10,7 +10,7 @@
 
     <!--    Title Bar   -->
     <dimen name="title_radius">60dp</dimen>
-    <dimen name="title_padding_lrb">15dp</dimen>
+    <dimen name="title_padding_lrbt">10dp</dimen>
     <dimen name="title_padding_top">30dp</dimen>
     <dimen name="title_margin_t_name">5dp</dimen>
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.gis.landsurveyor.responseModel.RequestModel
 import com.esri.arcgisruntime.geometry.Point
+import kotlin.properties.Delegates
 
 class HomeActivity : AppCompatActivity() {
 
@@ -11,6 +12,7 @@ class HomeActivity : AppCompatActivity() {
     companion object {
         lateinit var startPoint: Point
         lateinit var currentRequestModel: RequestModel
+        var currentRequest by Delegates.notNull<Int>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

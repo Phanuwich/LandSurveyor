@@ -1,5 +1,6 @@
 package com.gis.landsurveyor
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
     private val retrofitClient: RetrofitClient = RetrofitClient()
     private val apiService = retrofitClient.callApi()
     lateinit var empInfo: EmployeeInfo
+    lateinit var progerssProgressDialog: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
 //        supportActionBar!!.hide()
         super.onCreate(savedInstanceState)
@@ -26,6 +28,11 @@ class LoginActivity : AppCompatActivity() {
         login_btn.setOnClickListener {
             val username = username.text.toString()
             val password = password.text.toString()
+            progerssProgressDialog=ProgressDialog(this)
+            progerssProgressDialog.setTitle("Loading")
+            progerssProgressDialog.setCancelable(false)
+            progerssProgressDialog.show()
+
             callLogin(username,password)
         }
     }
@@ -34,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
         val requestObj = LoginRequest(username,password)
         apiService.userLogin(requestObj).enqueue(object : Callback<LoginResponse> {
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                progerssProgressDialog.dismiss()
                 Log.d("chikk", "Failure jaaa ${t}")
             }
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
@@ -51,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
     fun callEmployee(user_id: Int?) {
         apiService.getEmpInfo(user_id).enqueue(object : Callback<EmployeeInfo>{
             override fun onFailure(call: Call<EmployeeInfo>, t: Throwable) {
+                progerssProgressDialog.dismiss()
                 Log.d("chikk", "Failure jaaa $t")
             }
             override fun onResponse(call: Call<EmployeeInfo>, response: Response<EmployeeInfo>) {
@@ -67,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
                     SingletonEmp.instance = empInfo
                     val intent = Intent(applicationContext, HomeActivity::class.java)
 //                    intent.putExtra("EmpInfo",empInfo)
+                    progerssProgressDialog.dismiss()
                     finish()
                     startActivity(intent)
                 }

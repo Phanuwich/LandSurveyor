@@ -5,7 +5,7 @@
     <color name="colorTextBoxBack">#CCE6E6E6</color>
     <color name="colorInput">#686868</color>
     <color name="colorLogin">#ffffff</color>
-    <color name="colorEmpName">#ffffff</color>
+    <color name="colorEmpName">#000000</color>
     <color name="colorLoginBut">#FF5722</color>
     <color name="colorHint">#c3acacac</color>
     <color name="colorListBtn1">#00BDBD</color>
@@ -13,6 +13,9 @@
     <color name="colorListBtn3">#DCC000</color>
     <color name="colorTitleBar">#609762</color>
     <color name="colorItem">#CC808080</color>
+    <color name="colorWhiteTitle">#ffffff</color>
+    <color name="colorBackTitle">#000000</color>
+
 
     <color name="colorRedoUndo">#E68787</color>
     <color name="colorFinish">#006400</color>
