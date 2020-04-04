@@ -5,9 +5,11 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:statusBarColor">@color/colorWhiteTitle</item>
-<!--        <item name="android:windowLightStatusBar">true</item>-->
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
         <item name="android:windowTranslucentNavigation">true</item>
+
+        <!--        <item name="fontFamily">@font/font_local</item>-->
+        <!--        <item name="android:windowLightStatusBar">true</item>-->
         <!--        <item name="colorAccent">@color/colorAccent</item>-->
     </style>
 

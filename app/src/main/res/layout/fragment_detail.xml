@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/detail_back"
     tools:context=".DetailFragment">
 
     <ScrollView
@@ -18,31 +19,77 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-    <include
-        android:id="@+id/include"
-        layout="@layout/detail_request"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.063" />
+        <include
+            android:id="@+id/include"
+            layout="@layout/detail_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.063" />
 
-    <Button
-        android:id="@+id/startBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/detail_start_btn"
-        android:layout_gravity="center"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
 
-    <Button
-        android:id="@+id/routingBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Navigation"
-        android:layout_gravity="center"/>
+                <LinearLayout
+                    android:id="@+id/topBtnLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="30dp">
+
+                    <Button
+                        android:id="@+id/acceptBtn"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/detail_button_back_no_fill"
+                        android:text="Accept"
+                        android:layout_marginEnd="5dp"
+                        android:textColor="@color/colorWhiteTitle"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/font_for_detail_btn"/>
+
+                    <Button
+                        android:id="@+id/routingBtn"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/detail_button_back_no_fill"
+                        android:text="Navigation"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/colorWhiteTitle"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/font_for_detail_btn"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/startBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/detail_button_back"
+                    android:text="@string/detail_start_btn"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBackTitle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/topBtnLayout"
+                    app:layout_constraintStart_toStartOf="@+id/topBtnLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/topBtnLayout"
+                    android:fontFamily="@font/font_for_detail_btn"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

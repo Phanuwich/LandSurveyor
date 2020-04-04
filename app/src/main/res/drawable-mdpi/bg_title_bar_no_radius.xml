@@ -6,4 +6,8 @@
     <padding android:bottom="@dimen/title_padding_lrbt"/>
     <padding android:top="@dimen/title_padding_lrbt"/>
 
+<!--    <gradient android:startColor="@color/colorBackTitle"-->
+<!--        android:endColor="@color/colorWhiteTitle"-->
+<!--        android:angle="-90"/>-->
+
 </shape>

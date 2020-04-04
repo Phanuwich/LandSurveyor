@@ -1,5 +1,6 @@
 package com.gis.landsurveyor
 
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.gis.landsurveyor.responseModel.RequestModel
@@ -13,6 +14,7 @@ class HomeActivity : AppCompatActivity() {
         lateinit var startPoint: Point
         lateinit var currentRequestModel: RequestModel
         var currentRequest by Delegates.notNull<Int>()
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

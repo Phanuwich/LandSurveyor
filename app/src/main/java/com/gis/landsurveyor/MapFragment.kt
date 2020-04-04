@@ -1,6 +1,5 @@
 package com.gis.landsurveyor
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.esri.arcgisruntime.geometry.*
 import com.esri.arcgisruntime.mapping.ArcGISMap
 import com.esri.arcgisruntime.mapping.Basemap
@@ -48,6 +49,7 @@ class MapFragment : Fragment() {
     val mPointSymbol = SimpleMarkerSymbol(SimpleMarkerSymbol.Style.SQUARE, Color.RED, 15F)
 
     val centPointSymbol = SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CROSS, Color.MAGENTA, 20F)
+    lateinit var navController: NavController
 
     lateinit var mLocationDisplay: LocationDisplay
     override fun onCreateView(
@@ -63,7 +65,7 @@ class MapFragment : Fragment() {
         request = HomeActivity.currentRequestModel
         val latitude = request.latitude!!
         val longitude = request.longitude!!
-
+        navController = findNavController()
 
 
         centPointSymbol.outline = SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.CYAN, 2.0f)
@@ -128,10 +130,10 @@ class MapFragment : Fragment() {
     }
 
     private fun toSummaryPage() {
-//        val intent = Intent(applicationContext, SavedActivity::class.java)
-//        intent.putExtra("DeedID",DeedID)
-//        intent.putExtra("Area",area)
-//        startActivity(intent)
+
+        val action = MapFragmentDirections.actionMapFragmentToSavedFragment()
+//        action.areaArgs = area.toFloat()
+        navController.navigate(R.id.action_mapFragment_to_savedFragment)
     }
 
     fun createGraphicsOverlay(){

@@ -2,11 +2,11 @@
 <font-family xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <font
-        android:font="@font/th_bold"
+        android:font="@font/th_medium"
         android:fontStyle="normal"
         android:fontWeight="400"
 
-        app:font="@font/th_bold"
+        app:font="@font/th_medium"
         app:fontStyle="normal"
         app:fontWeight="400"/>
 </font-family>

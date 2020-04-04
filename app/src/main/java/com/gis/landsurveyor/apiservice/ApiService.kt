@@ -1,6 +1,5 @@
 package com.gis.landsurveyor.apiservice
 
-import com.gis.landsurveyor.User
 import com.gis.landsurveyor.requestModel.LoginRequest
 import com.gis.landsurveyor.requestModel.UpdateRequest
 import com.gis.landsurveyor.responseModel.*
@@ -10,8 +9,6 @@ import java.util.ArrayList
 
 interface ApiService {
 
-    @GET("/users")
-    fun getUser():Call<ArrayList<User>>
 
 
     @Headers("Content-Type: application/json")

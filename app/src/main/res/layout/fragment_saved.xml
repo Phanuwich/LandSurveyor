@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/detail_back"
+    tools:context=".SavedFragment">
+
+<!--    <TextView-->
+<!--        android:id="@+id/title_label"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/font_fam_lg"-->
+<!--        android:gravity="left"-->
+<!--        android:text="Fill Information"-->
+<!--        android:textColor="@color/colorWhiteTitle"-->
+<!--        android:background="@drawable/title_detail_bg"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.025" />-->
+
+
+    <TextView
+        android:id="@+id/saveTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_fam_lg"
+        android:padding="5dp"
+        android:text="Please Fill Information"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhiteTitle"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.247" />
+
+    <TextView
+        android:id="@+id/areaLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Area :"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhiteTitle"
+        android:fontFamily="@font/font_fam_lg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/saveTitle"
+        app:layout_constraintTop_toBottomOf="@+id/saveTitle"
+        app:layout_constraintVertical_bias="0.066" />
+
+    <TextView
+        android:id="@+id/areaText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_for_detail"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhiteTitle"
+        android:textSize="16dp"
+        android:background="@drawable/save_edit_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/areaLabel"
+        app:layout_constraintEnd_toEndOf="@+id/saveTitle"
+        app:layout_constraintStart_toEndOf="@+id/numLabel"
+        app:layout_constraintTop_toTopOf="@+id/areaLabel" />
+
+    <TextView
+        android:id="@+id/numLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/font_fam_lg"
+        android:text="Deed Number :"
+        android:layout_marginEnd="5dp"
+        android:textAlignment="gravity"
+        android:textColor="@color/colorWhiteTitle"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/areaLabel"
+        app:layout_constraintTop_toBottomOf="@+id/areaLabel" />
+
+    <EditText
+        android:id="@+id/deedNum"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/save_edit_bg"
+        android:fontFamily="@font/font_for_detail"
+        android:hint="Deed Number"
+        android:inputType="text"
+        android:text="RD128432"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhiteTitle"
+        android:textColorHint="@color/colorHint"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/numLabel"
+        app:layout_constraintEnd_toEndOf="@+id/saveTitle"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/numLabel"
+        app:layout_constraintTop_toTopOf="@+id/numLabel" />
+
+
+
+    <TextView
+        android:id="@+id/typeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Deed Type :"
+        android:textAlignment="gravity"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhiteTitle"
+        android:fontFamily="@font/font_fam_lg"
+        app:layout_constraintStart_toStartOf="@+id/numLabel"
+        app:layout_constraintTop_toBottomOf="@+id/numLabel" />
+
+    <Spinner
+        android:id="@+id/deedSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:dropDownWidth="wrap_content"
+        android:fontFamily="@font/font_for_detail"
+        android:padding="5dp"
+        android:scrollbarSize="20dp"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/typeLabel"
+        app:layout_constraintEnd_toEndOf="@+id/deedNum"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/numLabel"
+        app:layout_constraintTop_toTopOf="@+id/typeLabel" />
+
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/detail_button_back"
+        android:fontFamily="@font/font_fam_lg"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBackTitle"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/deedNum"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/typeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/typeLabel" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,7 @@
     <string name="item_name">Request Name : %s</string>
 
     <!--    Detail page    -->
-    <string name="detail_start_btn">Start survey</string>
+    <string name="detail_start_btn">Start Survey</string>
 
 
     <!--    Routing page    -->
@@ -33,6 +33,10 @@
     <string name="latLong">Longitude: %.8f, Latitude: %.8f</string>
     <string name="enable_gps">Please enable your gps</string>
     <string name="permission_request">App requires location permission</string>
+
+
+    <!--    Detail    -->
+    <string name="loading">-</string>
 
     <string-array name="statusList">
         <item>assigned</item>

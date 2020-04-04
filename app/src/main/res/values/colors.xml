@@ -15,7 +15,10 @@
     <color name="colorItem">#CC808080</color>
     <color name="colorWhiteTitle">#ffffff</color>
     <color name="colorBackTitle">#000000</color>
-
+    <color name="colorStatusBar">#000000</color>
+    <color name="colorDetailBtn">#ffffff</color>
+    <color name="colorDetailText">#000000</color>
+    <color name="colorDetailTextInfo">#5A5A5A</color>
 
     <color name="colorRedoUndo">#E68787</color>
     <color name="colorFinish">#006400</color>

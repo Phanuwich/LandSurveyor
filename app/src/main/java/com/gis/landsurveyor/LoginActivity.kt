@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.d
 import com.gis.landsurveyor.apiservice.RetrofitClient
 import com.gis.landsurveyor.requestModel.LoginRequest
 import com.gis.landsurveyor.responseModel.EmployeeInfo
@@ -75,12 +76,23 @@ class LoginActivity : AppCompatActivity() {
                     empInfo = response.body()!!
                     SingletonEmp.instance = empInfo
                     val intent = Intent(applicationContext, HomeActivity::class.java)
-//                    intent.putExtra("EmpInfo",empInfo)
-                    progerssProgressDialog.dismiss()
                     finish()
                     startActivity(intent)
                 }
             }
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        d("chikk","on Pause")
+    }
+
+    override fun onDestroy() {
+        d("chikk","on Destroy")
+        progerssProgressDialog.dismiss()
+        super.onDestroy()
+
+
     }
 }

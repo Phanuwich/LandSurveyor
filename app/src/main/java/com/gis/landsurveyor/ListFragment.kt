@@ -10,8 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.gis.landsurveyor.apiservice.ApiService
-import com.gis.landsurveyor.apiservice.BASE_URL
 import com.gis.landsurveyor.apiservice.RetrofitClient
 import com.gis.landsurveyor.responseModel.EmployeeInfo
 import com.gis.landsurveyor.responseModel.RequestModel
@@ -19,8 +17,6 @@ import kotlinx.android.synthetic.main.fragment_list.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -55,25 +51,9 @@ class ListFragment : Fragment() {
         if(header.isEmpty()){tmpHeaders.forEach { header.add(it) }}
         Log.d("chikk", "header $header")
         empInfo = SingletonEmp.instance!!
-        requestUser()
         callRequests(empInfo.employee_id)
     }
 
-    fun requestUser(){
-        callApi().getUser().enqueue(object : Callback<ArrayList<User>>{
-            override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
-
-            }
-
-            override fun onResponse(
-                call: Call<ArrayList<User>>,
-                response: Response<ArrayList<User>>
-            ) {
-                d("chikk","result = ${response.body()?.get(0)}")
-            }
-
-        })
-    }
 
     private fun callRequests(emp_id: Int?) {
         Log.d("chikk", "start again")
@@ -102,19 +82,12 @@ class ListFragment : Fragment() {
                         }
                         Log.d("chikk", "Body $body")
                     }
-                    expandableListView.setAdapter(MyExpandableListAdapter(fContext,expandableListView,header,body))
+                    expandableListView.setAdapter(MyExpandableListAdapter(context!!,expandableListView,header,body))
                 }
             }
         })
     }
 
-    private fun callApi(): ApiService {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        return retrofit.create(ApiService::class.java)
-    }
     private fun makBodyTemp(){
         for (i in 0 until  header.size) {
             body.add(tmpBody)
