@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,28 +10,91 @@
     <com.esri.arcgisruntime.mapping.view.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/navigationControls">
-
+        android:layout_height="match_parent">
     </com.esri.arcgisruntime.mapping.view.MapView>
 
+
     <TextView
-        android:id="@+id/latLong"
+        android:id="@+id/recenterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0.0"
+        android:layout_margin="5dp"
+        android:background="@drawable/selector_recenter_bg"
+        android:drawableStart="@drawable/ic_recenter"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/light"
+        android:text="@string/recenter"
+        android:textColor="@color/colorWhiteTitle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <include
-        android:id="@+id/navigationControls"
-        layout="@layout/layout_navigation_controls"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/navigationControlsBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/shadow_navigate"
+            android:padding="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mapView"
+            app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@+id/timeRemainingTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="00:00 min"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorNavBg"
+            android:textSize="25dp"
+            app:autoSizeMaxTextSize="30dp"
+            app:autoSizeMinTextSize="9dp"
+            app:autoSizeStepGranularity="2dp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/distanceRemainingTextView"
+            app:layout_constraintHorizontal_bias="0.431"
+            app:layout_constraintStart_toStartOf="@+id/distanceRemainingTextView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/distanceRemainingTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="00 Kilometers"
+            android:textAlignment="textStart"
+            android:textSize="20dp"
+            app:autoSizeMaxTextSize="25dp"
+            app:autoSizeMinTextSize="9dp"
+            app:autoSizeStepGranularity="2dp"
+            app:autoSizeTextType="uniform"
+            android:layout_marginStart="10dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeRemainingTextView" />
+
+
+        <TextView
+            android:id="@+id/exitButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/selector_exit_cancel_bg"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/light"
+            android:text="@string/Exit"
+            android:textAlignment="center"
+            android:textColor="@drawable/selector_exit_cancel_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

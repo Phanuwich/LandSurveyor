@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
+    android:layout_gravity="center"
+    android:layout_margin="20dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/dialog_bg">
+
+        <TextView
+            android:id="@+id/dialogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_fam_lg"
+            android:padding="5dp"
+            android:text="Title"
+            android:textAlignment="center"
+            android:textColor="@color/colorSaveText"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAreaTextBg"
+            app:layout_constraintTop_toBottomOf="@+id/dialogTitle"
+            tools:layout_editor_absoluteX="15dp"
+            android:layout_marginTop="3dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            android:layout_marginTop="10dp"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/areaLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_fam_lg"
+                android:text="@string/areaUnit"
+                android:textColor="@color/colorSaveText"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/areaTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/font_for_detail"
+                android:text="area"
+                android:textAlignment="textEnd"
+
+                app:layout_constraintBottom_toBottomOf="@+id/areaLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/areaLabel"
+                android:textSize="18dp"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <TextView
+                android:id="@+id/numLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/font_fam_lg"
+                android:text="Deed Number :"
+                android:textAlignment="gravity"
+                android:textColor="@color/colorSaveText"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/areaLabel"
+                app:layout_constraintTop_toBottomOf="@+id/areaLabel" />
+
+            <TextView
+                android:id="@+id/numTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textAlignment="textEnd"
+                android:fontFamily="@font/font_for_detail"
+                app:layout_constraintBottom_toBottomOf="@+id/numLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/numLabel"
+                android:textSize="18dp"
+                app:layout_constraintVertical_bias="0.5"/>
+
+
+            <TextView
+                android:id="@+id/typeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/font_fam_lg"
+                android:text="Deed Type :"
+                android:textAlignment="gravity"
+                android:textColor="@color/colorSaveText"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/numLabel"
+                app:layout_constraintTop_toBottomOf="@+id/numLabel" />
+
+
+            <TextView
+                android:id="@+id/typeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textAlignment="textEnd"
+                android:fontFamily="@font/font_for_detail"
+                app:layout_constraintBottom_toBottomOf="@+id/typeLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/typeLabel"
+                android:textSize="18dp"
+                app:layout_constraintVertical_bias="0.5"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/typeLabel">
+
+                <TextView
+                    android:id="@+id/cancel_Btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_exit_cancel_bg"
+                    android:fontFamily="@font/font_fam_lg"
+                    android:text="Cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/selector_exit_cancel_text" />
+
+                <TextView
+                    android:id="@+id/confirmBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:background="@drawable/selector_save_bg"
+                    android:fontFamily="@font/font_fam_lg"
+                    android:text="Confirm"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/selector_save_text" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:padding="20dp"-->
+<!--    android:layout_gravity="center"-->
+<!--    android:background="@drawable/shadow_detail"-->
+<!--    android:layout_margin="20dp">-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/areaLabel"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="right"-->
+<!--        android:fontFamily="@font/font_for_detail"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="@string/areaUnit"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/areaTxt"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/font_for_detail"-->
+<!--        android:padding="10dp"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/areaLabel"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/areaLabel"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/areaLabel" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/numLabel"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="right"-->
+<!--        android:fontFamily="@font/font_for_detail"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="Deed Number:"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/areaLabel"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/areaLabel" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/numTxt"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/font_for_detail"-->
+<!--        android:padding="10dp"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/numLabel"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/areaTxt"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/areaLabel" />-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/typeLabel"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="right"-->
+<!--        android:fontFamily="@font/font_for_detail"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="Deed Type:"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/areaLabel"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/numLabel" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/typeTxt"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/font_for_detail"-->
+<!--        android:padding="10dp"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/typeLabel"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/numTxt"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/numLabel" />-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/typeLabel">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/finishedBtn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:background="@drawable/ok_btn"-->
+<!--            android:text="Finish Request"-->
+<!--            android:textColor="@color/colorSaveBtnText" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/saveBtn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:background="@drawable/cancel_btn"-->
+<!--            android:text="Save"-->
+<!--            android:textColor="@color/colorSaveBtnText" />-->
+
+<!--    </LinearLayout>-->
+
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

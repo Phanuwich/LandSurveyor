@@ -1,15 +1,17 @@
 package com.gis.landsurveyor
 
-import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.Log.d
+import android.view.WindowManager
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.gis.landsurveyor.apiservice.RetrofitClient
 import com.gis.landsurveyor.requestModel.LoginRequest
+import com.gis.landsurveyor.requestModel.LoginResponse
+import com.gis.landsurveyor.responseModel.ConfigModel
 import com.gis.landsurveyor.responseModel.EmployeeInfo
-import com.gis.landsurveyor.responseModel.LoginResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,82 +19,79 @@ import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
-    private val retrofitClient: RetrofitClient = RetrofitClient()
-    private val apiService = retrofitClient.callApi()
+    private val apiService = RetrofitClient.callApi()
     lateinit var empInfo: EmployeeInfo
-    lateinit var progerssProgressDialog: ProgressDialog
+    lateinit var loadingDialog: AlertDialog
     override fun onCreate(savedInstanceState: Bundle?) {
 //        supportActionBar!!.hide()
+        this.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        this.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         login_btn.setOnClickListener {
             val username = username.text.toString()
             val password = password.text.toString()
-            progerssProgressDialog=ProgressDialog(this)
-            progerssProgressDialog.setTitle("Loading")
-            progerssProgressDialog.setCancelable(false)
-            progerssProgressDialog.show()
-
+            showLoadDialog()
             callLogin(username,password)
         }
     }
 
     private fun callLogin(username: String, password: String) {
-        val requestObj = LoginRequest(username,password)
+        val requestObj = LoginRequest(username,password,getString(R.string.login_role))
         apiService.userLogin(requestObj).enqueue(object : Callback<LoginResponse> {
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                progerssProgressDialog.dismiss()
-                Log.d("chikk", "Failure jaaa ${t}")
+                loadingDialog.dismiss()
+                Toast.makeText(this@LoginActivity, getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
             }
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-//                d("chikk","status = ${response.message()}")
                 if (response.body()?.user_id == null) {
-                    Log.d("chikk", getString(R.string.error_login))
+                    loadingDialog.dismiss()
+                    Toast.makeText(this@LoginActivity, getString(R.string.error_login), Toast.LENGTH_SHORT).show()
                 }else{
-                    Log.d("chikk", "Login success user id = ${response.body()?.user_id}")
-                    callEmployee(response.body()?.user_id)
+                    callConfig(response.body()?.user_id)
                 }
             }
         })
     }
 
-    fun callEmployee(user_id: Int?) {
-        apiService.getEmpInfo(user_id).enqueue(object : Callback<EmployeeInfo>{
-            override fun onFailure(call: Call<EmployeeInfo>, t: Throwable) {
-                progerssProgressDialog.dismiss()
-                Log.d("chikk", "Failure jaaa $t")
+    fun callConfig(user_id: Int?) {
+        apiService.getConfig(user_id).enqueue(object : Callback<ConfigModel>{
+            override fun onFailure(call: Call<ConfigModel>, t: Throwable) {
+                loadingDialog.dismiss()
+                Toast.makeText(this@LoginActivity, getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
             }
-            override fun onResponse(call: Call<EmployeeInfo>, response: Response<EmployeeInfo>) {
-                if (response.body()?.employee_id == null) {
-                    Log.d("chikk", getString(R.string.error_emp))
+            override fun onResponse(call: Call<ConfigModel>, response: Response<ConfigModel>) {
+                if (response.body()?.user == null) {
+                    Toast.makeText(this@LoginActivity, getString(R.string.error_config), Toast.LENGTH_SHORT).show()
                 }else{
-                    Log.d(
-                        "chikk", "Your Employee info = ${response.body()?.employee_id}," +
-                                "${response.body()?.user_id}," +
-                                "${response.body()?.first_name}," +
-                                "${response.body()?.last_name}"
-                    )
-                    empInfo = response.body()!!
-                    SingletonEmp.instance = empInfo
+                    SingletonConfig.instance = response.body()!!
                     val intent = Intent(applicationContext, HomeActivity::class.java)
                     finish()
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    loadingDialog.dismiss()
                     startActivity(intent)
                 }
             }
         })
     }
 
+    private fun showLoadDialog() {
+        loadingDialog = LoadDialog.showLoadDialog(this)
+        loadingDialog.show()
+    }
+
     override fun onPause() {
         super.onPause()
-        d("chikk","on Pause")
     }
 
     override fun onDestroy() {
-        d("chikk","on Destroy")
-        progerssProgressDialog.dismiss()
         super.onDestroy()
+    }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

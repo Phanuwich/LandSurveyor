@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/detail_back"
-    tools:context=".SavedFragment">
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_margin="20dp"
+tools:context=".SavedFragment">
 
-<!--    <TextView-->
-<!--        android:id="@+id/title_label"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:fontFamily="@font/font_fam_lg"-->
-<!--        android:gravity="left"-->
-<!--        android:text="Fill Information"-->
-<!--        android:textColor="@color/colorWhiteTitle"-->
-<!--        android:background="@drawable/title_detail_bg"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.025" />-->
 
+<!--<androidx.constraintlayout.widget.ConstraintLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="parent"-->
+<!--    android:paddingTop="10dp"-->
+<!--    android:paddingBottom="10dp">-->
 
     <TextView
         android:id="@+id/saveTitle"
@@ -29,126 +22,197 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/font_fam_lg"
         android:padding="5dp"
-        android:text="Please Fill Information"
+        android:text="Fill Information"
         android:textAlignment="center"
-        android:textColor="@color/colorWhiteTitle"
-        android:textSize="22dp"
+        android:textColor="@color/colorSaveText"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/areaLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Area :"
-        android:textSize="20dp"
-        android:textColor="@color/colorWhiteTitle"
-        android:fontFamily="@font/font_fam_lg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/saveTitle"
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAreaTextBg"
         app:layout_constraintTop_toBottomOf="@+id/saveTitle"
-        app:layout_constraintVertical_bias="0.066" />
-
-    <TextView
-        android:id="@+id/areaText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/font_for_detail"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhiteTitle"
-        android:textSize="16dp"
-        android:background="@drawable/save_edit_bg"
-        app:layout_constraintBottom_toBottomOf="@+id/areaLabel"
-        app:layout_constraintEnd_toEndOf="@+id/saveTitle"
-        app:layout_constraintStart_toEndOf="@+id/numLabel"
-        app:layout_constraintTop_toTopOf="@+id/areaLabel" />
-
-    <TextView
-        android:id="@+id/numLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/font_fam_lg"
-        android:text="Deed Number :"
-        android:layout_marginEnd="5dp"
-        android:textAlignment="gravity"
-        android:textColor="@color/colorWhiteTitle"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/areaLabel"
-        app:layout_constraintTop_toBottomOf="@+id/areaLabel" />
-
-    <EditText
-        android:id="@+id/deedNum"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/save_edit_bg"
-        android:fontFamily="@font/font_for_detail"
-        android:hint="Deed Number"
-        android:inputType="text"
-        android:text="RD128432"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhiteTitle"
-        android:textColorHint="@color/colorHint"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/numLabel"
-        app:layout_constraintEnd_toEndOf="@+id/saveTitle"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/numLabel"
-        app:layout_constraintTop_toTopOf="@+id/numLabel" />
+        tools:layout_editor_absoluteX="15dp"
+        android:layout_marginTop="3dp"/>
 
 
 
-    <TextView
-        android:id="@+id/typeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Deed Type :"
-        android:textAlignment="gravity"
-        android:textSize="20dp"
-        android:textColor="@color/colorWhiteTitle"
-        android:fontFamily="@font/font_fam_lg"
-        app:layout_constraintStart_toStartOf="@+id/numLabel"
-        app:layout_constraintTop_toBottomOf="@+id/numLabel" />
-
-    <Spinner
-        android:id="@+id/deedSpinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:dropDownWidth="wrap_content"
-        android:fontFamily="@font/font_for_detail"
-        android:padding="5dp"
-        android:scrollbarSize="20dp"
-        android:spinnerMode="dropdown"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/typeLabel"
-        app:layout_constraintEnd_toEndOf="@+id/deedNum"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/numLabel"
-        app:layout_constraintTop_toTopOf="@+id/typeLabel" />
-
-
-    <Button
-        android:id="@+id/saveBtn"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/detail_button_back"
-        android:fontFamily="@font/font_fam_lg"
-        android:text="Save"
-        android:textAllCaps="false"
-        android:textColor="@color/colorBackTitle"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="@+id/deedNum"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/typeLabel"
-        app:layout_constraintTop_toBottomOf="@+id/typeLabel" />
+        android:layout_marginTop="20dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        app:layout_constraintVertical_bias="0">
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/areaLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_fam_lg"
+                android:text="@string/areaUnit"
+                android:textColor="@color/colorSaveText"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/areaText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/area_fill"
+                android:fontFamily="@font/font_for_detail"
+                android:textAlignment="center"
+                android:textColor="@color/colorSaveEditText"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/areaLabel"
+                app:layout_constraintTop_toBottomOf="@+id/areaLabel" />
+
+            <TextView
+                android:id="@+id/numLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/font_fam_lg"
+                android:text="Deed Number :"
+                android:textAlignment="gravity"
+                android:textColor="@color/colorSaveText"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/areaLabel"
+                app:layout_constraintTop_toBottomOf="@+id/areaText" />
+
+
+            <EditText
+                android:id="@+id/deedNum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_border"
+                android:fontFamily="@font/font_for_detail"
+                android:hint="Deed Number"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColor="@color/colorSaveEditText"
+                android:textColorHint="@color/colorHint"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/numLabel"
+                app:layout_constraintTop_toBottomOf="@+id/numLabel" />
+
+            <TextView
+                android:id="@+id/typeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/font_fam_lg"
+                android:text="Deed Type :"
+                android:textAlignment="gravity"
+                android:textColor="@color/colorSaveText"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/numLabel"
+                app:layout_constraintTop_toBottomOf="@+id/deedNum" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_border"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/deedNum"
+                app:layout_constraintTop_toBottomOf="@+id/typeLabel"
+                tools:ignore="UselessParent">
+
+                <Spinner
+                    android:id="@+id/deedSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dropDownWidth="wrap_content"
+                    android:fontFamily="@font/font_for_detail"
+                    android:scrollbarSize="20dp"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintBottom_toBottomOf="@+id/typeLabel"
+                    app:layout_constraintEnd_toEndOf="@+id/deedNum"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/deedNum"
+                    app:layout_constraintTop_toTopOf="@+id/typeLabel" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/menuBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/submitBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:background="@drawable/selector_submit_bg"
+            android:fontFamily="@font/font_fam_lg"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@drawable/selector_submit_text" />
+
+        <TextView
+            android:id="@+id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:background="@drawable/selector_save_bg"
+            android:fontFamily="@font/font_fam_lg"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@drawable/selector_save_text" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/menuBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/selector_detail_btn"
+        android:fontFamily="@font/font_for_detail_btn"
+        android:text="Back to home"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlackTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

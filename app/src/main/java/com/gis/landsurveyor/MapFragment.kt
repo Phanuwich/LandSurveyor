@@ -1,20 +1,24 @@
 package com.gis.landsurveyor
 
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.esri.arcgisruntime.ArcGISRuntimeEnvironment
 import com.esri.arcgisruntime.geometry.*
 import com.esri.arcgisruntime.mapping.ArcGISMap
 import com.esri.arcgisruntime.mapping.Basemap
 import com.esri.arcgisruntime.mapping.view.Graphic
 import com.esri.arcgisruntime.mapping.view.GraphicsOverlay
 import com.esri.arcgisruntime.mapping.view.LocationDisplay
+import com.esri.arcgisruntime.symbology.PictureMarkerSymbol
 import com.esri.arcgisruntime.symbology.SimpleFillSymbol
 import com.esri.arcgisruntime.symbology.SimpleLineSymbol
 import com.esri.arcgisruntime.symbology.SimpleMarkerSymbol
@@ -22,7 +26,9 @@ import com.gis.landsurveyor.responseModel.RequestModel
 import kotlinx.android.synthetic.main.fragment_map.*
 import java.text.DecimalFormat
 import java.util.*
+import java.util.concurrent.ExecutionException
 import kotlin.math.absoluteValue
+import kotlin.math.round
 
 /**
  * A simple [Fragment] subclass.
@@ -32,26 +38,23 @@ class MapFragment : Fragment() {
 
     private var longitude: Double = 0.0
     private var latitude: Double = 0.0
-    private var DeedID: Int = 0
     private var area: Double = 0.0
-    private val df = DecimalFormat("#.####")
     private var mGraphicsOverlay: GraphicsOverlay? = null
     private var pointGraphicsOverlay: GraphicsOverlay? = null
     private lateinit var logStack: Stack<Point>
     var polygonPoints = PointCollection(SpatialReferences.getWgs84())
     private var polygon: Polygon? = null
 
-    val polygonSymbol = SimpleFillSymbol(
+    private val polygonSymbol = SimpleFillSymbol(
         SimpleFillSymbol.Style.SOLID, Color.argb(50,226, 119, 40),
         SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.BLUE, 2.0f)
     )
 
-    val mPointSymbol = SimpleMarkerSymbol(SimpleMarkerSymbol.Style.SQUARE, Color.RED, 15F)
+    val mPointSymbol = SimpleMarkerSymbol(SimpleMarkerSymbol.Style.SQUARE, Color.RED, 10F)
 
-    val centPointSymbol = SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CROSS, Color.MAGENTA, 20F)
+    lateinit var centPointSymbol: PictureMarkerSymbol
     lateinit var navController: NavController
 
-    lateinit var mLocationDisplay: LocationDisplay
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,19 +65,22 @@ class MapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        HomeActivity.titleContainer.visibility = View.GONE
         request = HomeActivity.currentRequestModel
-        val latitude = request.latitude!!
-        val longitude = request.longitude!!
+        latitude = request.latitude!!
+        longitude = request.longitude!!
         navController = findNavController()
-
-
-        centPointSymbol.outline = SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.CYAN, 2.0f)
         logStack = Stack()
-        val map = ArcGISMap(Basemap.Type.TOPOGRAPHIC, latitude, longitude, 16)
+
+
+        ArcGISRuntimeEnvironment.setLicense(resources.getString(R.string.arcgis_license_key))
+        val map = ArcGISMap(Basemap.Type.TOPOGRAPHIC_VECTOR, latitude, longitude, 16)
+        mapView.isAttributionTextVisible = false
         mapView.map = map
 
         createGraphicsOverlay()
         createPointGraphics()
+        if (polygonPoints.isNotEmpty()){addPolygon()}
 
         pointer.setOnClickListener {
             getLocation()
@@ -106,11 +112,10 @@ class MapFragment : Fragment() {
                     GeodeticCurveType.GEODESIC
                 ).toDouble().absoluteValue
                 if (area != 0.0) {
-                    Log.d("chikk", "AREA = $area")
+                    area = round(area * 1000)/1000
                     toSummaryPage()
                 }
             }
-            Log.d("chikk", "Finish at first")
         }
 
     }
@@ -130,13 +135,12 @@ class MapFragment : Fragment() {
     }
 
     private fun toSummaryPage() {
-
-        val action = MapFragmentDirections.actionMapFragmentToSavedFragment()
-//        action.areaArgs = area.toFloat()
-        navController.navigate(R.id.action_mapFragment_to_savedFragment)
+        val bundle = Bundle()
+        bundle.putDouble("AREA",area)
+        navController.navigate(R.id.action_mapFragment_to_savedFragment,bundle)
     }
 
-    fun createGraphicsOverlay(){
+    private fun createGraphicsOverlay(){
         pointGraphicsOverlay = GraphicsOverlay()
         mapView!!.graphicsOverlays.add(pointGraphicsOverlay)
         mGraphicsOverlay = GraphicsOverlay()
@@ -150,32 +154,37 @@ class MapFragment : Fragment() {
         val screenPoint = android.graphics.Point(lox, loy)
         val mapPoint = mapView.screenToLocation(screenPoint)
         val wgs84Point = GeometryEngine.project(mapPoint, SpatialReferences.getWgs84()) as Point
-        Log.d(
-            "chikkkkkkk",
-            "Lat: " + String.format("%.4f", wgs84Point.y) + ", Lon: " + String.format(
-                "%.4f",
-                wgs84Point.x
-            )
-        )
         polygonPoints.add(Point(wgs84Point.x, wgs84Point.y))
-
-//        val mPointSymbol = SimpleMarkerSymbol(SimpleMarkerSymbol.Style.DIAMOND, -0xFFFFFF, 20F)
-//            mPointSymbol.outline = SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.BLUE, 2.0f)
-//        val mPointGraphic = Graphic(points, mPointSymbol)
-//        mPointGraphicsOverlay!!.graphics.add(mPointGraphic)
     }
 
-    fun createPointGraphics(){
-//        val point = Point(latitude,longitude, SpatialReferences.getWgs84())
+    private fun createPointGraphics(){
+        val picSymbol = ContextCompat.getDrawable(context!!, R.drawable.pin) as BitmapDrawable?
+        centPointSymbol = PictureMarkerSymbol.createAsync(picSymbol).get()
         val point = Point(
             longitude, latitude,
             SpatialReferences.getWgs84()
         )
 
-        val pointGraphic = Graphic(point, centPointSymbol)
-        pointGraphicsOverlay?.graphics?.add(pointGraphic)
-        Log.d("chikk", "la long = doneeeee")
+        try {
+            // Create Picture Symbol
+            centPointSymbol = PictureMarkerSymbol.createAsync(picSymbol).get()
+//            val pinSourceSymbol: PictureMarkerSymbol = PictureMarkerSymbol("http://sampleserver6.arcgisonline.com/arcgis/rest/services/Recreation/FeatureServer/0/images/e82f744ebb069bb35b234b3fea46deae")
 
+            centPointSymbol.height = 28F
+            centPointSymbol.width = 28F
+            centPointSymbol.offsetY = 14F
+            // Load Picture
+            centPointSymbol.loadAsync()
+
+            centPointSymbol.addDoneLoadingListener {
+                val pointGraphic = Graphic(point, centPointSymbol)
+                pointGraphicsOverlay?.graphics?.add(pointGraphic)
+            }
+        }catch (e: InterruptedException){
+            e.printStackTrace()
+        }catch (e: ExecutionException) {
+            e.printStackTrace()
+        }
     }
 
 }

@@ -7,21 +7,68 @@
     <color name="colorLogin">#ffffff</color>
     <color name="colorEmpName">#000000</color>
     <color name="colorLoginBut">#FF5722</color>
+    <color name="colorLoginButPress">#80FF5722</color>
     <color name="colorHint">#c3acacac</color>
+
+    <color name="colorLoadingBg">#99FFFFFF</color>
+    <color name="colorDialogBg">#E6FFFFFF</color>
+    <color name="colorDialogText">#2196F3</color>
+    <color name="colorDialogTextPressed">#FFFFFF</color>
+    <color name="colorDialogTextFinished">#2CAE0E</color>
+
+    <color name="colorLogout">#000000</color>
+    <color name="colorLogoutPressed">#ffffff</color>
+
+
+    <color name="colorStatusBar">#FFC107</color>
     <color name="colorListBtn1">#00BDBD</color>
     <color name="colorListBtn2">#BD00B0</color>
     <color name="colorListBtn3">#DCC000</color>
     <color name="colorTitleBar">#609762</color>
     <color name="colorItem">#CC808080</color>
+    <color name="colorGroupItem">#CCCFC6C6</color>
+
     <color name="colorWhiteTitle">#ffffff</color>
-    <color name="colorBackTitle">#000000</color>
-    <color name="colorStatusBar">#000000</color>
+    <color name="colorBlackTitle">#000000</color>
     <color name="colorDetailBtn">#ffffff</color>
     <color name="colorDetailText">#000000</color>
     <color name="colorDetailTextInfo">#5A5A5A</color>
 
+    <color name="colorImageBtn">#0174D1</color>
+    <color name="colorImageBtnPressed">#75BFFA</color>
+
+    <color name="colorSuccess">#4CAF50</color>
+    <color name="colorAssigned">#FFC107</color>
+    <color name="colorCollecting">#FF5722</color>
+
+
+    <color name="colorSaveText">#000000</color>
+    <color name="colorSaveEditText">#8A8A8A</color>
+    <color name="colorAreaTextBg">#DFDFDF</color>
+    <color name="colorSaveBtnText">#000000</color>
+
+    <color name="colorOk">#006400</color>
+    <color name="colorCancel">#E68787</color>
+
     <color name="colorRedoUndo">#E68787</color>
-    <color name="colorFinish">#006400</color>
+    <color name="colorRedoUndoPressed">#BA5555</color>
+    <color name="colorFinish">#009688</color>
+    <color name="colorFinishPressed">#056A61</color>
     <color name="colorFinishText">#ffffff</color>
+    <color name="colorAdd">#2196F3</color>
+    <color name="colorAddPressed">#126FB8</color>
+
+
+
+
+    <color name="colorRecenterBg">#1D387C</color>
+    <color name="colorRecenterPressedBg">#801D387C</color>
+    <color name="colorExitBg">#9C1515</color>
+
+    <color name="colorNavBg">#0B8A2E</color>
+    <color name="colorNavBgPressed">#990B8A2E</color>
+
+    <color name="colorNavBgBottom">#CCFFFFFF</color>
+
 
 </resources>

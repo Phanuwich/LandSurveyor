@@ -12,7 +12,6 @@
         app:fontStyle="normal"
         app:fontWeight="400" />
 
-
     <!-- bold -->
     <font
         android:font="@font/regular"

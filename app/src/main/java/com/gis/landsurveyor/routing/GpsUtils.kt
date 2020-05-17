@@ -1,4 +1,4 @@
-package com.gis.landsurveyor
+package com.gis.landsurveyor.routing
 
 import android.app.Activity
 import android.content.ContentValues.TAG
@@ -7,6 +7,7 @@ import android.content.IntentSender
 import android.location.LocationManager
 import android.util.Log
 import android.widget.Toast
+import com.gis.landsurveyor.GPS_REQUEST
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationServices

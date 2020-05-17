@@ -5,262 +5,437 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/detail_back_dialog">
+    android:padding="@dimen/inner_container_padding">
 
 
     <TextView
         android:id="@+id/title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/font_for_detail_head"
+        android:fontFamily="@font/font_fam_lg"
         android:gravity="left"
+        android:textSize="20dp"
         android:text="Request Detail"
         android:textColor="@color/colorDetailText"
-        android:background="@drawable/title_detail_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/id_label"
+        android:id="@+id/editBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/font_for_detail_head"
-        android:gravity="left"
-        android:text="Request ID"
-        android:textColor="@color/colorDetailText"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/selector_edit_btn"
+        android:fontFamily="@font/light"
+        android:text="Edit request"
+        android:textAllCaps="false"
+        android:textColor="@drawable/selector_exit_cancel_text"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_label"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintTop_toBottomOf="@+id/title_label"/>
 
-    <TextView
-        android:id="@+id/id_info"
+    <ImageButton
+        android:id="@+id/routingBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="right"
-        android:text="@string/loading"
-        android:fontFamily="@font/font_for_detail"
-        android:textColor="@color/colorDetailTextInfo"
-        app:layout_constraintBottom_toBottomOf="@+id/id_label"
+        android:background="@drawable/selector_nav"
+        android:src="@drawable/ic_recenter"
+        app:layout_constraintBottom_toBottomOf="@+id/editBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/id_label"
-        app:layout_constraintTop_toTopOf="@+id/id_label" />
-
-    <TextView
-        android:id="@+id/dName_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="left"
-        android:text="Place"
-        android:textColor="@color/colorDetailText"
-        android:fontFamily="@font/font_for_detail_head"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/id_label"
-        app:layout_constraintTop_toBottomOf="@+id/id_info"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/dName_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:text="@string/loading"
-        android:textColor="@color/colorDetailTextInfo"
-        android:fontFamily="@font/font_for_detail"
-        app:layout_constraintBottom_toBottomOf="@+id/dName_label"
-        app:layout_constraintEnd_toEndOf="@+id/id_info"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@+id/dName_label"
-        app:layout_constraintTop_toTopOf="@+id/dName_label" />
-
-    <TextView
-        android:id="@+id/cName_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="left"
-        android:text="Customer Name"
-        android:textColor="@color/colorDetailText"
-        android:fontFamily="@font/font_for_detail_head"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/id_label"
-        app:layout_constraintTop_toBottomOf="@+id/dName_info"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/cName_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/font_for_detail"
-        android:gravity="right"
-        android:text="@string/loading"
-        android:textColor="@color/colorDetailTextInfo"
-        app:layout_constraintBottom_toBottomOf="@+id/cName_label"
-        app:layout_constraintEnd_toEndOf="@+id/id_info"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/cName_label"
-        app:layout_constraintTop_toTopOf="@+id/cName_label"
+        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintStart_toEndOf="@+id/title_label"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/phone_label"
-        android:layout_width="wrap_content"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/font_for_detail_head"
-        android:gravity="left"
-        android:text="Phone Number"
-        android:textColor="@color/colorDetailText"
+        android:background="@drawable/shadow_item_list"
+        android:paddingBottom="@dimen/stroke_padding_btw_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editBtn"
+        android:padding="@dimen/inner_container_padding">
+
+
+        <ImageView
+            android:id="@+id/id_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_id"
+            android:layout_marginStart="@dimen/icon_detail_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0" />
+
+        <TextView
+            android:id="@+id/id_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail_head"
+            android:text="Request ID"
+            android:textColor="@color/colorDetailText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toEndOf="@+id/id_ic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/id_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail"
+            android:text="@string/loading"
+            android:textColor="@color/colorDetailTextInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/id_label"
+            app:layout_constraintTop_toBottomOf="@+id/id_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/stroke_padding_btw_group"
+        android:layout_marginTop="@dimen/inner_container_padding"
+        android:background="@drawable/shadow_item_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        android:padding="@dimen/inner_container_padding">
+
+        <ImageView
+            android:id="@+id/place_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_place"
+            android:layout_marginStart="@dimen/icon_detail_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0" />
+
+        <TextView
+            android:id="@+id/dName_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail_head"
+            android:text="Place"
+            android:textColor="@color/colorDetailText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/place_ic"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"/>
+
+        <TextView
+            android:id="@+id/dName_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail"
+            android:text="@string/loading"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorDetailTextInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/dName_label"
+            app:layout_constraintTop_toBottomOf="@+id/dName_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/stroke_padding_btw_group"
+        android:layout_marginTop="@dimen/inner_container_padding"
+        android:background="@drawable/shadow_item_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        android:padding="@dimen/inner_container_padding">
+
+        <ImageView
+            android:id="@+id/cName_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/icon_detail_padding"
+            android:src="@drawable/ic_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/cName_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail_head"
+            android:text="Customer Name"
+            android:textColor="@color/colorDetailText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toEndOf="@+id/cName_ic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cName_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail"
+            android:text="@string/loading"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorDetailTextInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/cName_label"
+            app:layout_constraintTop_toBottomOf="@+id/cName_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/stroke_padding_btw_group"
+        android:layout_marginTop="@dimen/inner_container_padding"
+        android:background="@drawable/shadow_item_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+        android:padding="@dimen/inner_container_padding">
+        <ImageView
+            android:id="@+id/phone_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_tel"
+            android:layout_marginStart="@dimen/icon_detail_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0" />
+
+        <TextView
+            android:id="@+id/phone_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail_head"
+            android:gravity="left"
+            android:text="Phone Number"
+            android:textColor="@color/colorDetailText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toEndOf="@+id/phone_ic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/phone_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail"
+            android:text="@string/loading"
+            android:textColor="@color/colorDetailTextInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/phone_label"
+            app:layout_constraintTop_toBottomOf="@+id/phone_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/stroke_padding_btw_group"
+        android:layout_marginTop="@dimen/inner_container_padding"
+        android:background="@drawable/shadow_item_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+        android:padding="@dimen/inner_container_padding">
+
+        <ImageView
+            android:id="@+id/address_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_address"
+            android:layout_marginStart="@dimen/icon_detail_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0" />
+
+        <TextView
+            android:id="@+id/address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail_head"
+            android:gravity="left"
+            android:text="Address"
+            android:textColor="@color/colorDetailText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toEndOf="@+id/address_ic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/address_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail"
+            android:text="@string/loading"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorDetailTextInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/address_label"
+            app:layout_constraintTop_toBottomOf="@+id/address_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/stroke_padding_btw_group"
+        android:layout_marginTop="@dimen/inner_container_padding"
+        android:background="@drawable/shadow_item_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
+        android:padding="@dimen/inner_container_padding">
+
+        <ImageView
+            android:id="@+id/date_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_date"
+            android:layout_marginStart="@dimen/icon_detail_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0" />
+
+        <TextView
+            android:id="@+id/date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail_head"
+            android:gravity="left"
+            android:text="Last Modified"
+            android:textColor="@color/colorDetailText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toEndOf="@+id/date_ic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/date_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail"
+            android:gravity="bottom"
+            android:text="@string/loading"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorDetailTextInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/date_label"
+            app:layout_constraintTop_toBottomOf="@+id/date_label"
+            tools:ignore="RtlCompat" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/stroke_padding_btw_group"
+        android:layout_marginTop="@dimen/inner_container_padding"
+        android:background="@drawable/shadow_item_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
+        android:padding="@dimen/inner_container_padding">
+
+        <ImageView
+            android:id="@+id/status_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_status"
+            android:layout_marginStart="@dimen/icon_detail_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/status_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail_head"
+            android:gravity="left"
+            android:text="Status : "
+            android:textColor="@color/colorDetailText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toEndOf="@+id/status_ic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/status_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_for_detail"
+            android:text="@string/loading"
+            android:textColor="@color/colorDetailTextInfo"
+            app:layout_constraintBottom_toBottomOf="@+id/status_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toEndOf="@+id/status_label"
+            app:layout_constraintTop_toTopOf="@+id/status_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/viewImagesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/noimg_detail_bg"
+        android:fontFamily="@font/light"
+        android:text="View images"
+        android:textAllCaps="false"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/id_label"
-        app:layout_constraintTop_toBottomOf="@+id/cName_info"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout7"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
+        app:layout_constraintVertical_bias="0.1" />
 
-    <TextView
-        android:id="@+id/phone_info"
+    <ImageView
+        android:id="@+id/arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/font_for_detail"
-        android:gravity="right"
-        android:text="@string/loading"
-        android:textColor="@color/colorDetailTextInfo"
-        app:layout_constraintBottom_toBottomOf="@+id/phone_label"
-        app:layout_constraintEnd_toEndOf="@+id/id_info"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/phone_label"
-        app:layout_constraintTop_toTopOf="@+id/phone_label"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TableRow
-        android:id="@+id/hr"
-        android:layout_width="0dp"
-        android:layout_height="0.5dp"
-        android:background="@color/colorBackTitle"
-        app:layout_constraintBottom_toTopOf="@+id/address_label"
-        app:layout_constraintEnd_toEndOf="@+id/phone_info"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/address_info"
-        app:layout_constraintTop_toBottomOf="@+id/phone_label" />
-
-    <TextView
-        android:id="@+id/address_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="Address"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/font_for_detail_head"
-        android:textColor="@color/colorDetailText"
+        android:src="@drawable/arrow_down_noimg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/id_label"
-        app:layout_constraintTop_toBottomOf="@+id/phone_info"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/address_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/loading"
-        android:textAlignment="textEnd"
-        android:fontFamily="@font/font_for_detail"
-        android:textColor="@color/colorDetailTextInfo"
-        app:layout_constraintEnd_toEndOf="@+id/phone_info"
-        app:layout_constraintStart_toStartOf="@+id/address_label"
-        app:layout_constraintTop_toBottomOf="@+id/address_label" />
-
-    <TableRow
-        android:id="@+id/hr1"
-        android:layout_width="0dp"
-        android:layout_height="0.5dp"
-        android:background="@color/colorBackTitle"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="@color/colorDetailText"
-        app:layout_constraintBottom_toTopOf="@+id/date_label"
-        app:layout_constraintEnd_toEndOf="@+id/phone_info"
-        app:layout_constraintHorizontal_bias="0.281"
-        app:layout_constraintStart_toStartOf="@+id/address_info"
-        app:layout_constraintTop_toBottomOf="@+id/address_info"/>
-
-    <TextView
-        android:id="@+id/date_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/font_for_detail_head"
-        android:gravity="left"
-        android:text="Last Modified"
-        android:textColor="@color/colorDetailText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/id_label"
-        app:layout_constraintTop_toBottomOf="@+id/address_info"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/date_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/font_for_detail"
-        android:textAlignment="textEnd"
-        android:gravity="bottom"
-        android:text="@string/loading"
-        android:textColor="@color/colorDetailTextInfo"
-        app:autoSizeTextType="uniform"
-        app:autoSizeMinTextSize="9dp"
-        app:autoSizeMaxTextSize="30dp"
-        app:autoSizeStepGranularity="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/date_label"
-        app:layout_constraintEnd_toEndOf="@+id/id_info"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/date_label"
-        app:layout_constraintTop_toTopOf="@+id/date_label"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="RtlCompat" />
-
-    <TextView
-        android:id="@+id/status_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="left"
-        android:text="Status"
-        android:textColor="@color/colorDetailText"
-        android:fontFamily="@font/font_for_detail_head"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/id_label"
-        app:layout_constraintTop_toBottomOf="@+id/date_info"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/status_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/font_for_detail"
-        android:gravity="right"
-        android:text="@string/loading"
-        android:textColor="@color/colorDetailTextInfo"
-        app:layout_constraintBottom_toBottomOf="@+id/status_label"
-        app:layout_constraintEnd_toEndOf="@+id/id_info"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/status_label"
-        app:layout_constraintTop_toTopOf="@+id/status_label"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/viewImagesBtn"
+        app:layout_constraintStart_toStartOf="@+id/viewImagesBtn"
+        app:layout_constraintTop_toBottomOf="@+id/viewImagesBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

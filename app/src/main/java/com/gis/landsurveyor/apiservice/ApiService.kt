@@ -1,11 +1,12 @@
 package com.gis.landsurveyor.apiservice
 
 import com.gis.landsurveyor.requestModel.LoginRequest
+import com.gis.landsurveyor.requestModel.LoginResponse
 import com.gis.landsurveyor.requestModel.UpdateRequest
 import com.gis.landsurveyor.responseModel.*
 import retrofit2.Call
 import retrofit2.http.*
-import java.util.ArrayList
+import io.reactivex.Observable
 
 interface ApiService {
 
@@ -17,25 +18,35 @@ interface ApiService {
         @Body request_body: LoginRequest
     ):Call<LoginResponse>
 
-    @GET("/api/v1/employees")
-    fun getEmpInfo(
+    @GET("/api/v1/configs")
+    fun getConfig(
         @Query("user_id") user_id:Int?
-    ):Call<EmployeeInfo>
+    ):Call<ConfigModel>
 
     @GET("/api/v1/deeds")
     fun getRequests(
-        @Query("employee_id") employee_id:Int?
-    ):Call<MutableList<RequestModel>>
+        @Query("employee_id") employee_id:Int?,
+        @Query("status_id") status_id:String = "not:5",
+        @Query("sort") sort: String ="status_id,updated_date"
+        ):Call<MutableList<RequestModel>>
 
-//    @GET("/api/v1/customers/{id}")
-//    fun getCustomer(
-//        @Path("id") id: Int
-//    ):Call<Customer>
+    @GET("/api/v1/deeds")
+    fun getRequestsTest(
+        @QueryMap body: HashMap<String, Any>
+    ):Observable<MutableList<RequestModel>>
+
+//    @GET(ServiceURL.NEAR_COV)
+//    @Headers("Referer: COVID19SelfTracking")
+//    fun callNearCovid(@QueryMap body: HashMap<String, Any>, @Header("Authorization") authorization: String): Observable<Response<Void>>
 
     @GET("/api/v1/deeds/{id}")
     fun getDetail(
         @Path("id") id: Int
     ):Call<RequestModel>
+
+    @GET("/api/v1/deedType")
+    fun getDeedType(
+    ):Call<ArrayList<DeedType>>
 
     @PATCH("api/v1/deeds/{id}")
     fun updateStatus(

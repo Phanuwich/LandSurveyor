@@ -40,12 +40,12 @@ dependencies {
     // api part
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     // gis part
     implementation 'com.esri.arcgisruntime:arcgis-android:100.7.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-    // dexter
-    implementation 'com.karumi:dexter:6.0.2'
 
     // view part
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
@@ -58,6 +58,11 @@ dependencies {
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
+    // RxJava & RxAndroid & RxKotlin
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
@@ -67,5 +72,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.0.6'
 
+    implementation 'com.airbnb.android:lottie:3.4.0'
 }

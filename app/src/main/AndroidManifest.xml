@@ -21,8 +21,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".NavigateActivity"></activity>
         <activity android:name=".HomeActivity" />
-        <activity android:name=".ItemActivity" />
         <activity android:name=".LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

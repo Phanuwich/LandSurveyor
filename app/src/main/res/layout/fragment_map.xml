@@ -9,7 +9,7 @@
     <com.esri.arcgisruntime.mapping.view.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
     </com.esri.arcgisruntime.mapping.view.MapView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,17 +25,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/ic_adjust_target_red_50dp"
+            android:background="@drawable/ic_target"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/finishedBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/finish_button"
+        android:background="@drawable/selector_finish"
         android:text="Finished"
+        android:textSize="20dp"
+        android:fontFamily="@font/light"
+        android:soundEffectsEnabled="true"
+        android:textAllCaps="false"
         android:layout_margin="20dp"
         android:textColor="@color/colorFinishText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +50,8 @@
         android:id="@+id/undoBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/redo_undo_bg"
-        android:src="@drawable/ic_undo_white_50dp"
+        android:background="@drawable/selector_redo_undo"
+        android:src="@drawable/ic_undo"
         android:padding="5dp"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,8 +61,8 @@
         android:id="@+id/redoBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/redo_undo_bg"
-        android:src="@drawable/ic_redo_white_50dp"
+        android:background="@drawable/selector_redo_undo"
+        android:src="@drawable/ic_redo"
         android:padding="5dp"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +73,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_add_circle_white_75dp"
+        android:background="@drawable/selector_add_point"
+        android:src="@drawable/ic_add_point"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

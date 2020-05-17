@@ -5,53 +5,63 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/imageView"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:background="@drawable/bg_title_bar_no_radius"
+android:padding="10dp"
 android:orientation="horizontal"
 tools:context=".TitleFragment">
 
     <TextView
-        android:id="@+id/imageView2"
+        android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
         android:text="Land Surveyor"
-        android:textColor="@color/colorBackTitle"
+        android:textColor="@color/colorBlackTitle"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/logout_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/logout_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/Title"
         app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="right"-->
+<!--            android:orientation="horizontal">-->
 
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Logout"-->
+<!--            android:textSize="15dp"-->
+<!--            android:textColor="@color/colorBlackTitle"-->
+<!--            android:layout_marginEnd="5dp"-->
+<!--            android:fontFamily="@font/light"/>-->
+<!--        <ImageView-->
+<!--            android:id="@+id/logout_symbol"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_logout"-->
+<!--            android:text="Logout" />-->
+<!--            -->
+<!--        </LinearLayout>-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:textSize="15dp"
-            android:textColor="@color/colorBackTitle"
-            android:layout_marginEnd="5dp"
+            android:textSize="10dp"
+            android:textColor="@drawable/selector_logout_text"
+            android:layout_gravity="right"
+            android:background="@drawable/selector_logout_bg"
             android:fontFamily="@font/light"/>
-        <ImageView
-            android:id="@+id/logout_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_logout"
-            android:text="Logout" />
-        </LinearLayout>
 
         <TextView
             android:id="@+id/emp_name_label"

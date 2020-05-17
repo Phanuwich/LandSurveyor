@@ -1,14 +1,16 @@
 package com.gis.landsurveyor.requestModel
 
+import com.google.gson.annotations.SerializedName
+
 data class UpdateRequest (
-//    "employee_id": 0,
-////    "area": 0,
-////    "deed_number": "string",
-////    "deed_status": "string",
-////    "status": "assigned"
+    @SerializedName("employee_id")
     val employee_id: Int? = null,
+    @SerializedName("area")
     val area: Number? = null,
+    @SerializedName("deed_number")
     val deed_number: String? = null,
-    val deed_status: String? = null,
-    val status: String? = null
+    @SerializedName("deed_type_id")
+    val deed_type_id: Int? = null,
+    @SerializedName("status_id")
+    val status_id: Int? = null
 )

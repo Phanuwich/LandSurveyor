@@ -2,22 +2,23 @@ package com.gis.landsurveyor
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
-import android.icu.text.LocaleDisplayNames
-import android.text.Layout
-import android.util.Log.d
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.get
 import com.gis.landsurveyor.responseModel.RequestModel
+import com.gis.landsurveyor.responseModel.RequestStatus
+import kotlinx.android.synthetic.main.exandable_list_group.view.*
 
-class MyExpandableListAdapter(var context :Context,var expandableListView: ExpandableListView,var header: MutableList<String>, var body:MutableList<MutableList<RequestModel>>) : BaseExpandableListAdapter() {
-    override fun getGroup(groupPosition: Int): String {
+class MyExpandableListAdapter(var context :Context,var expandableListView: ExpandableListView,var header: MutableList<RequestStatus>, var body:MutableList<MutableList<RequestModel>>) : BaseExpandableListAdapter() {
+    override fun getGroup(groupPosition: Int): RequestStatus {
         return header[groupPosition]
     }
 
@@ -29,7 +30,8 @@ class MyExpandableListAdapter(var context :Context,var expandableListView: Expan
         return false
     }
 
-    @SuppressLint("ResourceAsColor", "StringFormatMatches")
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("ResourceAsColor", "StringFormatMatches", "ResourceType")
     override fun getGroupView(
         groupPosition: Int,
         isExpanded: Boolean,
@@ -41,29 +43,35 @@ class MyExpandableListAdapter(var context :Context,var expandableListView: Expan
             val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = inflater.inflate(R.layout.exandable_list_group,null)
         }
-        val title = convertView?.findViewById<Button>(R.id.listGroup)
-//        title?.text = getGroup(groupPosition)
-        title?.text = context.getString(R.string.header_status,getGroup(groupPosition),getChildrenCount(groupPosition))
+        val title = convertView?.findViewById<TextView>(R.id.listGroup)
+        val tapGroup = convertView?.tapGroup
+        val arrow = convertView?.findViewById<ImageView>(R.id.arrow)
+        title?.text = context.getString(R.string.header_status,getGroup(groupPosition).name,getChildrenCount(groupPosition))
         when (groupPosition) {
             0 -> {
-                title?.setBackgroundResource(R.drawable.list_button_bg1)
+//                DrawableCompat.setTint(
+//                    DrawableCompat.wrap(context.getDrawable(R.drawable.ic_label_btn1)!!),
+//                    Color.parseColor("#FF5722")
+//                )
                 title?.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_label_btn1,0,0,0)
             }
             1 -> {
-                title?.setBackgroundResource(R.drawable.list_button_bg2)
                 title?.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_label_btn2,0,0,0)
             }
             else -> {
-                title?.setBackgroundResource(R.drawable.list_button_bg3)
                 title?.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_label_btn3,0,0,0)
             }
+
         }
-        title?.setOnClickListener {
-            if(expandableListView.isGroupExpanded(groupPosition))
+
+        tapGroup?.setOnClickListener {
+            if(expandableListView.isGroupExpanded(groupPosition)) {
+                arrow?.setImageResource(R.drawable.arrow_down)
                 expandableListView.collapseGroup(groupPosition)
-            else
-                expandableListView.expandGroup(groupPosition)
-            Toast.makeText(context, getGroup(groupPosition),Toast.LENGTH_SHORT).show()
+            }else {
+                arrow?.setImageResource(R.drawable.arrow_up)
+                expandableListView.expandGroup(groupPosition,true)
+            }
         }
         return convertView
     }
@@ -97,14 +105,23 @@ class MyExpandableListAdapter(var context :Context,var expandableListView: Expan
         val tap = convertView?.findViewById<View>(R.id.tap_item)
         val title = convertView?.findViewById<TextView>(R.id.listText)
         val title2 = convertView?.findViewById<TextView>(R.id.listText2)
+        val tag = convertView?.findViewById<ImageView>(R.id.tag_item)
 
         title?.text = context.getString(R.string.item_id,getChild(groupPosition,childPosition).deed_id.toString())
         title2?.text = context.getString(R.string.item_name,getChild(groupPosition,childPosition).deed_name)
+        when (groupPosition) {
+            0 -> {
+                tag?.setBackgroundResource(R.drawable.tag_item_collecting)
+            }
+            1 -> {
+                tag?.setBackgroundResource(R.drawable.tag_item_assigned)
+            }
+            else -> {
+                tag?.setBackgroundResource(R.drawable.tag_item_success)
+            }
+        }
 
         tap?.setOnClickListener {
-            //chane page here!
-            Toast.makeText(context, getChild(groupPosition,childPosition).deed_name,Toast.LENGTH_SHORT).show()
-            d("chikk","gfgfgfg = ${getChild(groupPosition,childPosition).deed_id}")
             HomeActivity.currentRequest = getChild(groupPosition,childPosition).deed_id
             HomeActivity.currentRequestModel = getChild(groupPosition,childPosition)
             ListFragment.navController.navigate(R.id.action_listFragment_to_detailFragment)

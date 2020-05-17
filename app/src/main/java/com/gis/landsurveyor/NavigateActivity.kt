@@ -7,49 +7,43 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.speech.tts.TextToSpeech.OnInitListener
 import android.text.format.DateUtils
 import android.util.Log
-import android.util.Log.d
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.esri.arcgisruntime.concurrent.ListenableFuture
-import com.esri.arcgisruntime.geometry.SpatialReferences
 import com.esri.arcgisruntime.mapping.ArcGISMap
 import com.esri.arcgisruntime.mapping.Basemap
 import com.esri.arcgisruntime.mapping.Viewpoint
 import com.esri.arcgisruntime.mapping.view.GraphicsOverlay
 import com.esri.arcgisruntime.navigation.DestinationStatus
-import com.esri.arcgisruntime.navigation.RouteTracker.NewVoiceGuidanceEvent
-import com.esri.arcgisruntime.navigation.RouteTracker.NewVoiceGuidanceListener
 import com.esri.arcgisruntime.navigation.TrackingStatus
 import com.esri.arcgisruntime.symbology.SimpleLineSymbol
 import com.esri.arcgisruntime.tasks.networkanalysis.RouteParameters
 import com.esri.arcgisruntime.tasks.networkanalysis.RouteResult
 import com.esri.arcgisruntime.tasks.networkanalysis.RouteTask
 import com.esri.arcgisruntime.tasks.networkanalysis.Stop
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
-import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.esri.arcgisruntime.geometry.Point
+import com.esri.arcgisruntime.geometry.*
 import com.esri.arcgisruntime.mapping.view.Graphic
 import com.esri.arcgisruntime.mapping.view.LocationDisplay
 import com.esri.arcgisruntime.navigation.RouteTracker
-import com.gis.landsurveyor.responseModel.RequestModel
-import kotlinx.android.synthetic.main.fragment_navigation.*
-import kotlinx.android.synthetic.main.layout_navigation_controls.*
+import com.esri.arcgisruntime.symbology.PictureMarkerSymbol
+import com.gis.landsurveyor.routing.GpsUtils
+import com.gis.landsurveyor.routing.LocationViewModel
+import kotlinx.android.synthetic.main.activity_navigate.*
 import java.util.ArrayList
 import java.util.concurrent.ExecutionException
 
@@ -57,31 +51,44 @@ class NavigateActivity : AppCompatActivity() {
 
     private var mTextToSpeech: TextToSpeech? = null
     private var mIsTextToSpeechInitialized = false
-
     private var mRouteAheadGraphic: Graphic? = null
     private var mRouteTraveledGraphic: Graphic? = null
-
     private var mRouteTracker: RouteTracker? = null
-
-    private lateinit var mLocationDisplay: LocationDisplay
-    lateinit var location: Location
-
+    private lateinit var loadingDialog: AlertDialog
     private lateinit var locationViewModel: LocationViewModel
     private var isGPSEnabled = false
-    lateinit var startPoint: Point
-    lateinit var request: RequestModel
-
+    private lateinit var startPoint: Point
+    private var destinationLat = 0.0
+    private var destinationLong = 0.0
+    private val picGraphicsOverlay = GraphicsOverlay()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigate)
-        request = intent.getParcelableExtra("request")
+        showLoadDialog()
+        destinationLat = intent.getDoubleExtra("latitude",0.0)
+        destinationLong = intent.getDoubleExtra("longitude",0.0)
 
+
+//        ArcGISRuntimeEnvironment.setLicense(resources.getString(R.string.arcgis_license_key))
         val map = ArcGISMap(Basemap.createStreetsVector())
+        mapView.isAttributionTextVisible = false
         mapView.map = map
+        mapView.graphicsOverlays.add(picGraphicsOverlay)
+
         getLocation()
         invokeLocationAction()
         navigate()
+
+        exitButton.setOnClickListener {
+            finish()
+        }
+
+        recenterButton.isEnabled = false
+        recenterButton.setOnClickListener(View.OnClickListener { v: View? ->
+            mapView.locationDisplay.autoPanMode = LocationDisplay.AutoPanMode.NAVIGATION
+            recenterButton.isEnabled = false
+        })
 
     }
 
@@ -107,11 +114,11 @@ class NavigateActivity : AppCompatActivity() {
 
     private fun invokeLocationAction() {
         when {
-            !isGPSEnabled -> d("chikk", "invoke gps ${getString(R.string.enable_gps)} ")
+            !isGPSEnabled -> Toast.makeText(this, getString(R.string.enable_gps),Toast.LENGTH_SHORT).show()
 
             isPermissionsGranted() -> startLocationUpdate()
 
-            shouldShowRequestPermissionRationale() -> d("chikk", "invoke show ${getString(R.string.permission_request)} ")
+            shouldShowRequestPermissionRationale() -> Toast.makeText(this, getString(R.string.permission_request),Toast.LENGTH_SHORT).show()
 
             else -> ActivityCompat.requestPermissions(
                 this,
@@ -124,13 +131,11 @@ class NavigateActivity : AppCompatActivity() {
     private fun startLocationUpdate() {
         locationViewModel.getLocationData().observe(this, Observer {
             setStop(it.longitude, it.latitude)
-//            latLong.text =  getString(R.string.latLong, it.longitude, it.latitude)
         })
     }
 
     private fun setStop(longitude: Double, latitude: Double) {
         startPoint = Point(longitude,latitude, SpatialReferences.getWgs84())
-        d("chikk","starttt rrr = $startPoint")
     }
 
     private fun isPermissionsGranted() =
@@ -196,16 +201,17 @@ class NavigateActivity : AppCompatActivity() {
                         val routeGeometry = routeResult.routes[0].routeGeometry
                         // create a graphic for the route geometry
                         val routeGraphic = Graphic(routeGeometry,
-                            SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.BLUE, 5f)
+                            SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.GRAY, 5f)
                         )
                         // add it to the graphics overlay
                         mapView.graphicsOverlays[0].graphics.add(routeGraphic)
                         // set the map view view point to show the whole route
                         mapView.setViewpointAsync(Viewpoint(routeGeometry.extent))
                         // create a button to start navigation with the given route
-                        val navigateRouteButton = findViewById<Button>(R.id.navigateRouteButton)
-                        navigateRouteButton?.setOnClickListener { v: View? -> startNavigation(routeTask, routeParameters, routeResult) }
+//                        val navigateRouteButton = findViewById<ImageButton>(R.id.navigateRouteButton)
+//                        navigateRouteButton?.setOnClickListener { v: View? -> startNavigation(routeTask, routeParameters, routeResult) }
                         // start navigating
+                        loadingDialog.dismiss()
                         startNavigation(routeTask, routeParameters, routeResult)
                     } catch (e: ExecutionException) {
                         val error = "Error creating default route parameters1: " + e.message
@@ -230,31 +236,29 @@ class NavigateActivity : AppCompatActivity() {
     }
 
     private fun getStops(): List<Stop>? {
-        val stops: ArrayList<Stop> = ArrayList(3)
+        val stops: ArrayList<Stop> = ArrayList(2)
         val current = Stop(startPoint)
-        d("chikk","starttt = $startPoint")
         stops?.add(current)
         // USS San Diego Memorial
-        val destination = Stop(Point(100.412123, 13.876779, SpatialReferences.getWgs84()))
+        val destination = Stop(Point(destinationLong, destinationLat, SpatialReferences.getWgs84()))
         stops?.add(destination)
-        d("chikk","starttt = something")
-        d("chikk","starttt = $startPoint")
-        d("chikk","start eiei = $stops")
         return stops
     }
 
     private fun startNavigation(routeTask: RouteTask, routeParameters: RouteParameters, routeResult: RouteResult) { // clear any graphics from the current graphics overlay
+        var remainingTimeString:String
         mapView.graphicsOverlays[0].graphics.clear()
         // get the route's geometry from the route result
         val routeGeometry = routeResult.routes[0].routeGeometry
+        createGraphicsOverlay(routeResult.routes[0].stops.last().geometry.toWgs84())
         // create a graphic (with a dashed line symbol) to represent the route
         mRouteAheadGraphic = Graphic(routeGeometry,
-            SimpleLineSymbol(SimpleLineSymbol.Style.DASH, Color.MAGENTA, 5f)
+            SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.BLUE, 5f)
         )
         mapView.graphicsOverlays[0].graphics.add(mRouteAheadGraphic)
         // create a graphic (solid) to represent the route that's been traveled (initially empty)
         mRouteTraveledGraphic = Graphic(routeGeometry,
-            SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.BLUE, 5f)
+            SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.GRAY, 5f)
         )
         mapView.graphicsOverlays[0].graphics.add(mRouteTraveledGraphic)
         // get the map view's location display
@@ -266,7 +270,6 @@ class NavigateActivity : AppCompatActivity() {
 //        // set the simulated location data source as the location data source for this app
 //        locationDisplay.locationDataSource = mSimulatedLocationDataSource
 
-
         locationDisplay.autoPanMode = LocationDisplay.AutoPanMode.NAVIGATION
         // if the user navigates the map view away from the location display, activate the recenter button
         locationDisplay.addAutoPanModeChangedListener { recenterButton.isEnabled = true }
@@ -277,7 +280,7 @@ class NavigateActivity : AppCompatActivity() {
         // get a reference to navigation text views
         val distanceRemainingTextView = findViewById<TextView>(R.id.distanceRemainingTextView)
         val timeRemainingTextView = findViewById<TextView>(R.id.timeRemainingTextView)
-        val nextDirectionTextView = findViewById<TextView>(R.id.nextDirectionTextView)
+//        val nextDirectionTextView = findViewById<TextView>(R.id.nextDirectionTextView)
 
 
         // listen for changes in location
@@ -289,7 +292,7 @@ class NavigateActivity : AppCompatActivity() {
                 mRouteTracker?.addNewVoiceGuidanceListener { newVoiceGuidanceEvent: RouteTracker.NewVoiceGuidanceEvent ->
                     // use Android's text to speech to speak the voice guidance
                     speakVoiceGuidance(newVoiceGuidanceEvent.voiceGuidance.text)
-                    nextDirectionTextView?.text = getString(R.string.next_direction, newVoiceGuidanceEvent.voiceGuidance.text)
+//                    nextDirectionTextView?.text = getString(R.string.next_direction, newVoiceGuidanceEvent.voiceGuidance.text)
                 }
                 // get the route's tracking status
                 val trackingStatus: TrackingStatus? = mRouteTracker?.trackingStatus
@@ -299,14 +302,14 @@ class NavigateActivity : AppCompatActivity() {
                 // get remaining distance information
                 val remainingDistance = trackingStatus?.destinationProgress?.remainingDistance
                 // covert remaining minutes to hours:minutes:seconds
-                val remainingTimeString = DateUtils
-                    .formatElapsedTime(((trackingStatus?.destinationProgress?.remainingTime)!! * 60).toLong())
+                remainingTimeString = if (trackingStatus != null){DateUtils
+                    .formatElapsedTime(((trackingStatus.destinationProgress?.remainingTime)!! * 60).toLong())}else{"wait"}
                 // update text views
                 distanceRemainingTextView?.text = getString(R.string.distance_remaining, remainingDistance?.displayText,
                     remainingDistance?.displayTextUnits?.pluralDisplayName)
                 timeRemainingTextView?.text = getString(R.string.time_remaining, remainingTimeString)
                 // if a destination has been reached
-                if (trackingStatus.destinationStatus == DestinationStatus.REACHED) { // if there are more destinations to visit. Greater than 1 because the start point is considered a "stop"
+                if (trackingStatus?.destinationStatus == DestinationStatus.REACHED) { // if there are more destinations to visit. Greater than 1 because the start point is considered a "stop"
                     if (mRouteTracker?.trackingStatus?.remainingDestinationCount!! > 1) { // switch to the next destination
                         mRouteTracker!!.switchToNextDestinationAsync()
                         Toast.makeText(this, "Navigating to the second stop, the Fleet Science Center.", Toast.LENGTH_LONG).show()
@@ -319,7 +322,7 @@ class NavigateActivity : AppCompatActivity() {
         }
         // start the LocationDisplay, which starts the SimulatedLocationDataSource
         locationDisplay.startAsync()
-        Toast.makeText(this, "Navigating to the first stop, the USS San Diego Memorial.", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Navigating start", Toast.LENGTH_LONG).show()
     }
 
 
@@ -332,6 +335,53 @@ class NavigateActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun createGraphicsOverlay(point: Point){
+        picGraphicsOverlay.graphics.clear()
+        val picSymbol = ContextCompat.getDrawable(this, R.drawable.pin) as BitmapDrawable?
+        try {
+            // Create Picture Symbol
+            val pinSourceSymbol: PictureMarkerSymbol = PictureMarkerSymbol.createAsync(picSymbol).get()
+//            val pinSourceSymbol: PictureMarkerSymbol = PictureMarkerSymbol("http://sampleserver6.arcgisonline.com/arcgis/rest/services/Recreation/FeatureServer/0/images/e82f744ebb069bb35b234b3fea46deae")
+
+            pinSourceSymbol.height = 36F
+            pinSourceSymbol.width = 36F
+            // Sey Y position of picture from ground
+            pinSourceSymbol.offsetY = 18F
+            // Load Picture
+            pinSourceSymbol.loadAsync()
+            // Set Callback
+            pinSourceSymbol.addDoneLoadingListener {
+                // When Picture is loaded,
+                // Create New Graphic with Picture Symbol
+                val picGraphic = Graphic(point, pinSourceSymbol)
+                picGraphicsOverlay?.graphics?.add(picGraphic)
+            }
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        } catch (e: ExecutionException) {
+            e.printStackTrace()
+        }
+    }
+
+
+    private fun showLoadDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.loading_dialog,null)
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setView(dialogView)
+        dialogBuilder.setCancelable(false)
+
+        loadingDialog = dialogBuilder.create()
+        loadingDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        loadingDialog.show()
+    }
+
+    fun Point.toWgs84(): Point = GeometryEngine.project(this, SpatialReferences.getWgs84()) as Point
+//    fun Point.toWebMercator(): Point = GeometryEngine.project(this, SpatialReferences.getWebMercator()) as Point
+//    fun Polyline.toWgs84(): Polyline = GeometryEngine.project(this, SpatialReferences.getWgs84()) as Polyline
+//    fun Polyline.toWebMercator(): Polyline = GeometryEngine.project(this, SpatialReferences.getWebMercator()) as Polyline
+//    fun Polygon.toWgs84(): Polygon = GeometryEngine.project(this, SpatialReferences.getWgs84()) as Polygon
+//    fun Polygon.toWebMercator(): Polygon = GeometryEngine.project(this, SpatialReferences.getWebMercator()) as Polygon
 
 }
 

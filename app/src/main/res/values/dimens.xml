@@ -16,8 +16,8 @@
 
     <!--    Header list   -->
     <dimen name="all_stroke_padding">20dp</dimen>
-    <dimen name="stroke_width">3dp</dimen>
-    <dimen name="stroke_radius">10dp</dimen>
+    <dimen name="stroke_width">1dp</dimen>
+    <dimen name="stroke_radius">30dp</dimen>
     <dimen name="stroke_padding_left_right">25dp</dimen>
     <dimen name="stroke_height">100dp</dimen>
     <dimen name="stroke_padding_btw_group">5dp</dimen>
@@ -38,6 +38,11 @@
     <dimen name="appbar_padding">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+
+
+<!--    Detail screen   -->
+    <dimen name="inner_container_padding">10dp</dimen>
+    <dimen name="icon_detail_padding">15dp</dimen>
 
 
 </resources>
